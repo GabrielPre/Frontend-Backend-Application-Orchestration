@@ -10,15 +10,14 @@ pipeline {
         
         stage('docker compose up') {
             steps {
-                bat 'docker compose up -- build --abort-on-container-exit'
+                bat 'docker compose up --abort-on-container-exit'
             }
         }
 
         stage('push to release') {
             steps {
-                bat 'git branch release'
-                bat 'git switch release'
-                bat 'git push --verbose origin release'
+                bat 'git checkout -b release'
+                bat 'git merge develop'
             }
         }
 
