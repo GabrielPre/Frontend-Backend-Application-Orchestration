@@ -16,9 +16,8 @@ pipeline {
 
         stage('push to release') {
             steps {
-                bat 'git checkout release || git checkout -b release'
-                bat 'git merge origin/develop'
-                bat 'git push origin release'
+                git([url:'https://github.com/GabrielPre/Frontend-Backend-Application-Orchestration/',branch:'release'])
+                bat "git push origin release"
             }
         }
 
