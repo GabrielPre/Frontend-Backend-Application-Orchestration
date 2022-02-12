@@ -16,8 +16,9 @@ pipeline {
 
         stage('push to release') {
             steps {
-                bat 'git checkout release'
+                bat 'git checkout release || git checkout -b release'
                 bat 'git merge origin/develop'
+                bat 'git push'
             }
         }
 
