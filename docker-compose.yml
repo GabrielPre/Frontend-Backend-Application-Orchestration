@@ -9,3 +9,7 @@ services:
       - "3000:3000"
     depends_on:
       - "backend"
+  testing:
+    build: "testing"
+    depends_on:
+      - "backend"
