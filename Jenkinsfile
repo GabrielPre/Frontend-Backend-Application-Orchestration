@@ -18,7 +18,7 @@ pipeline {
             steps {
                 bat 'git checkout release || git checkout -b release'
                 bat 'git merge origin/develop'
-                bat 'git push'
+                bat 'git push origin release'
             }
         }
 
