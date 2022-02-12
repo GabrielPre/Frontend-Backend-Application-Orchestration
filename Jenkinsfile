@@ -14,9 +14,11 @@ pipeline {
             }
         }
 
-        stage('push to release') {
+        stage('merge from develop and push to release') {
             steps {
                 git([url:'https://github.com/GabrielPre/Frontend-Backend-Application-Orchestration/',branch:'release'])
+                bat "git checkout release"
+                bat "git merge origin/develop"
                 bat "git push origin release"
             }
         }
