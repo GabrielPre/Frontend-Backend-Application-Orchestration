@@ -4,8 +4,8 @@
 
 #ignore all JENKINS_HOME except jobs directory, root xml config, and .gitignore file
 /*
-/frontend/node_modules
-!/frontend
+/**/node_modules
+!frontend
 !/jobs
 !/.gitignore
 !/*.xml
