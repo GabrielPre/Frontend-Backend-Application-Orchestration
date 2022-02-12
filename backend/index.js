@@ -1,33 +1,29 @@
-// Constants
-const PORT = process.env.PORT || 3001;
-const session = require('express-session');
-const express = require("express");
-var cors = require("cors");
-// App
-const app = express();
+const express = require('express')
+const cors = require('cors')
+const app = express()
+const port = 3001
 
-app.use(session({
-            secret: 'secret string',
-            resave : false,
-            saveUninitialized : false,
-            cookie : {/* can add cookie related info here*/}
-        })
-      );
+app.use(cors({ credentials: true, origin: true }))
 
-app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-    credentials: true
-}));
+let pageVisits = 0
 
-app.get('/', function(req,res){
-    if (!req.session.pageCountByCurrentUserOfAnyNameYouWant)
-        req.session.pageCountByCurrentUserOfAnyNameYouWant = 0;
-    req.session.pageCountByCurrentUserOfAnyNameYouWant++;
-    res.send({
-        pageCount : req.session.pageCountByCurrentUserOfAnyNameYouWant
-    });
-});
+app.get('/', (req, res) => {
+  pageVisits += 1
 
+  res.send({
+    pageCount: pageVisits
+  })
+})
 
-app.listen(PORT, () => console.log(`The server is started on http://localhost:${PORT}`));
+app.post('/reset', (req, res) => {
+  pageVisits = 0
+  res.send({
+    success: pageVisits === 0
+  })
+})
+
+app.listen(port, () => {
+  console.log(`API listening on port ${port}`)
+})
+
+module.exports = { app }
