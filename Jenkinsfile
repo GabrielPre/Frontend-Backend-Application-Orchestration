@@ -19,7 +19,7 @@ pipeline {
                 git([url:'https://github.com/GabrielPre/Frontend-Backend-Application-Orchestration/',branch:'release'])
                 bat "git checkout release"
                 bat "git merge origin/develop"
-                bat "git push"
+                bat "git push --set-upstream origin release"
             }
         }
 
